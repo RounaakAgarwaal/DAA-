@@ -1,0 +1,20 @@
+N = int(input("Enter N: "))
+board = [-1]*N
+
+def safe(row, col):
+    for i in range(col):
+        if board[i] == row or abs(board[i]-row) == abs(i-col):
+            return False
+    return True
+
+def solve(col):
+    if col == N:
+        print(board)
+        return
+
+    for i in range(N):
+        if safe(i, col):
+            board[col] = i
+            solve(col+1)
+
+solve(0)
