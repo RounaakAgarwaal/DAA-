@@ -1,0 +1,26 @@
+V = int(input("Enter number of vertices: "))
+E = int(input("Enter number of edges: "))
+
+edges = []
+for _ in range(E):
+    u, v, w = map(int, input().split())
+    edges.append((u, v, w))
+
+src = int(input("Enter source: "))
+
+dist = [float('inf')] * V
+dist[src] = 0
+
+# relax edges V-1 times
+for _ in range(V-1):
+    for u, v, w in edges:
+        if dist[u] != float('inf') and dist[u] + w < dist[v]:
+            dist[v] = dist[u] + w
+
+# check negative cycle
+for u, v, w in edges:
+    if dist[u] + w < dist[v]:
+        print("Negative cycle detected")
+        break
+
+print("Distances:", dist)
