@@ -1,0 +1,17 @@
+items = [(60,10), (100,20), (120,30)]  # (profit, weight)
+capacity = int(input("Enter capacity: "))
+
+# sort by profit/weight ratio
+items.sort(key=lambda x: x[0]/x[1], reverse=True)
+
+total = 0
+
+for profit, weight in items:
+    if capacity >= weight:
+        capacity -= weight
+        total += profit
+    else:
+        total += profit * (capacity/weight)
+        break
+
+print("Max Profit:", total)
