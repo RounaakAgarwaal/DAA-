@@ -1,0 +1,32 @@
+# Recursive
+def binary_rec(arr, l, r, key):
+    if l > r:
+        return -1
+    mid = (l + r) // 2
+
+    if arr[mid] == key:
+        return mid
+    elif key < arr[mid]:
+        return binary_rec(arr, l, mid-1, key)
+    else:
+        return binary_rec(arr, mid+1, r, key)
+
+# Iterative
+def binary_iter(arr, key):
+    l, r = 0, len(arr)-1
+
+    while l <= r:
+        mid = (l + r) // 2
+        if arr[mid] == key:
+            return mid
+        elif key < arr[mid]:
+            r = mid - 1
+        else:
+            l = mid + 1
+    return -1
+
+arr = list(map(int, input("Enter sorted array: ").split()))
+key = int(input("Enter key: "))
+
+print("Recursive Index:", binary_rec(arr, 0, len(arr)-1, key))
+print("Iterative Index:", binary_iter(arr, key))
